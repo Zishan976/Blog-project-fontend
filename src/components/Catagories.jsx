@@ -1,0 +1,23 @@
+export const categories = [
+    ".NET",
+    "AI",
+    "Blockchain",
+    "Blog",
+    "Businesses",
+    "Data Engineering",
+    "Git",
+    "Golang",
+    "Java",
+    "JavaScript",
+    "Mobile App Development",
+    "MVP",
+    "Personal",
+    "Programming & Development",
+    "Python",
+    "React",
+    "Software Development",
+    "SQL Server",
+    "Staff- Augmentation",
+    "Technology",
+    "Web"
+]
