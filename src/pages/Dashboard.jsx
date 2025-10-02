@@ -14,11 +14,14 @@ const Dashboard = () => {
   const [filterTitle, setFilterTitle] = useState("");
   const navigate = useNavigate();
 
+  const apiBaseUrl =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get("http://localhost:5000/api/posts", {
+        const { data } = await axios.get(`${apiBaseUrl}/api/posts`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPosts(data);
