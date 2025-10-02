@@ -10,12 +10,13 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const apiBaseUrl =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:5000/api/posts/${id}`
-        );
+        const { data } = await axios.get(`${apiBaseUrl}/api/posts/${id}`);
         setPost(data);
       } catch (err) {
         setError("Failed to load post");
@@ -31,7 +32,7 @@ const BlogPost = () => {
       try {
         console.log("Incrementing view for post:", id);
         const response = await axios.post(
-          `http://localhost:5000/api/posts/${id}/increment-view`
+          `${apiBaseUrl}/api/posts/${id}/increment-view`
         );
         console.log("Increment response:", response.data);
       } catch (err) {

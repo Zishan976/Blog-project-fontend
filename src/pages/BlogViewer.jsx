@@ -12,10 +12,13 @@ const BlogViewer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 8;
 
+  const apiBaseUrl =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/posts");
+        const { data } = await axios.get(`${apiBaseUrl}/api/posts`);
         setPosts(data);
       } catch (err) {
         console.error("Failed to fetch posts", err);

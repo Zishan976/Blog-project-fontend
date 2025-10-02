@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 const YouMayLove = ({ currentCategory, currentPostId }) => {
   const [relatedPosts, setRelatedPosts] = useState([]);
 
+  const apiBaseUrl =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
   useEffect(() => {
     const fetchRelatedPosts = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/posts/related/${encodeURIComponent(
+          `${apiBaseUrl}/api/posts/related/${encodeURIComponent(
             currentCategory
           )}/${currentPostId}`
         );

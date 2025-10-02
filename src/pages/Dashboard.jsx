@@ -79,7 +79,7 @@ const Dashboard = () => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/posts/${postId}`, {
+      await axios.delete(`${apiBaseUrl}/api/posts/${postId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));

@@ -9,6 +9,9 @@ const ContentManagement = () => {
   const navigate = useNavigate();
   const editingPost = location.state?.post;
 
+  const apiBaseUrl =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
   const [post, setPost] = useState({
     title: "",
     image: "",
@@ -70,7 +73,7 @@ const ContentManagement = () => {
       let response;
       if (editingPost) {
         response = await axios.put(
-          `http://localhost:5000/api/posts/${editingPost._id}`,
+          `${apiBaseUrl}/api/posts/${editingPost._id}`,
           {
             ...post,
             tags: post.tags.split(",").map((tag) => tag.trim()),
@@ -85,7 +88,7 @@ const ContentManagement = () => {
         );
       } else {
         response = await axios.post(
-          "http://localhost:5000/api/posts",
+          `${apiBaseUrl}/api/posts`,
           {
             ...post,
             tags: post.tags.split(",").map((tag) => tag.trim()),
