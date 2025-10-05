@@ -32,6 +32,9 @@
     .tox-editor-header {
       @apply !flex overflow-x-auto;
     }
+    .minwid {
+      @apply min-w-[200px] absolute;
+    }
   }
 }
 

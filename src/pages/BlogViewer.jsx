@@ -74,7 +74,7 @@ const BlogViewer = () => {
       </nav>
 
       <aside
-        className={`fixed top-[7rem] left-0 bg-[#0C0A25] p-6 pt-0 rounded-lg shadow-lg h-[calc(100vh-7rem)] flex flex-col z-40 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-[7rem] left-0 bg-[#0C0A25] p-6 pt-0 rounded-lg shadow-lg h-[calc(100vh-7rem)] flex flex-col z-40 transform transition-transform duration-300 ease-in-out minwid ${
           sidebarOpen ? "translate-x-0 w-1/4" : "-translate-x-full w-0"
         }`}
       >
