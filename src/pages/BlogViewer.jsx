@@ -22,6 +22,7 @@ const BlogViewer = () => {
         setPosts(data);
       } catch (err) {
         console.error("Failed to fetch posts", err);
+        setPosts([]); // Set empty array on error
       }
     };
     fetchPosts();
@@ -135,7 +136,7 @@ const BlogViewer = () => {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="p-2 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-2 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Previous page"
               >
                 <ChevronLeft />
@@ -150,7 +151,7 @@ const BlogViewer = () => {
                     className={`w-8 h-8 flex items-center justify-center rounded ${
                       isActive
                         ? "bg-indigo-500 text-white"
-                        : "hover:bg-gray-200"
+                        : "hover:bg-gray-600"
                     }`}
                     aria-current={isActive ? "page" : undefined}
                   >
@@ -163,7 +164,7 @@ const BlogViewer = () => {
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
                 disabled={currentPage === totalPages}
-                className="p-2 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-2 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Next page"
               >
                 <ChevronRight />

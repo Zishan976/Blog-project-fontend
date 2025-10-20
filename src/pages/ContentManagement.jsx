@@ -25,6 +25,8 @@ const ContentManagement = () => {
     content: "",
     status: "draft",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     // Get username from localStorage or token payload
@@ -68,16 +70,28 @@ const ContentManagement = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
     try {
       const token = localStorage.getItem("token");
+      if (!token) {
+        setError("Authentication required. Please log in.");
+        return;
+      }
       let response;
       if (editingPost) {
         response = await axios.put(
           `${apiBaseUrl}/api/posts/${editingPost._id}`,
           {
             ...post,
-            tags: post.tags.split(",").map((tag) => tag.trim()),
-            category: post.category.split(",").map((cat) => cat.trim()),
+            tags: post.tags
+              .split(",")
+              .map((tag) => tag.trim())
+              .filter(Boolean),
+            category: post.category
+              .split(",")
+              .map((cat) => cat.trim())
+              .filter(Boolean),
             publish_on: new Date(post.publish_on),
           },
           {
@@ -91,8 +105,14 @@ const ContentManagement = () => {
           `${apiBaseUrl}/api/posts`,
           {
             ...post,
-            tags: post.tags.split(",").map((tag) => tag.trim()),
-            category: post.category.split(",").map((cat) => cat.trim()),
+            tags: post.tags
+              .split(",")
+              .map((tag) => tag.trim())
+              .filter(Boolean),
+            category: post.category
+              .split(",")
+              .map((cat) => cat.trim())
+              .filter(Boolean),
             publish_on: new Date(post.publish_on),
           },
           {
@@ -121,10 +141,14 @@ const ContentManagement = () => {
         });
         navigate("/admin");
       } else {
-        alert("Failed to save post");
+        setError("Failed to save post. Please try again.");
       }
     } catch (err) {
-      alert("Server error");
+      setError(
+        err.response?.data?.message || "Server error. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -301,11 +325,17 @@ const ContentManagement = () => {
             <option value="scheduled">Scheduled</option>
           </select>
         </div>
+        {error && <p className="text-red-500 text-sm">{error}</p>}
         <button
           type="submit"
-          className="bg-purple-700 text-white px-6 py-2 rounded hover:bg-purple-800 transition"
+          disabled={isSubmitting}
+          className="bg-purple-700 text-white px-6 py-2 rounded hover:bg-purple-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {editingPost ? "Update Post" : "Save Post"}
+          {isSubmitting
+            ? "Saving..."
+            : editingPost
+            ? "Update Post"
+            : "Save Post"}
         </button>
       </form>
     </div>
