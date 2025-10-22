@@ -2,6 +2,24 @@
 
 A modern React-based blog management system built with Vite, featuring a public blog viewer and an admin panel for content management.
 
+## Screenshots
+
+### Home Page
+
+![Home Page](public/font.png)
+
+### Login Page
+
+![Login Page](public/login.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](public/dashboard.png)
+
+### Content Management Form
+
+![Content Management Form](public/content-form.png)
+
 ## Features
 
 - **Public Blog Viewer**: Browse and read blog posts
